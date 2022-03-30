@@ -28,7 +28,7 @@ class ISPConfigWS
      *
      * @var int
      */
-    protected int $sessionId;
+    protected string $sessionId;
     /**
      * Holds the ISPConfig login details.
      *
