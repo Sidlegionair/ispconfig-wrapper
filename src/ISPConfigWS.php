@@ -77,14 +77,22 @@ class ISPConfigWS
             $this->config = $config;
         }
 
+        $opts = array(
+            'ssl' => array('verify_peer' => false, 'verify_peer_name' => false)
+        );
+
+
         $this->client = new SoapClient(
             null,
             array('location' => $this->config['host'].'/remote/index.php',
                   'uri' => $this->config['host'].'/remote/',
                   'trace' => 1,
                   'allow_self_siged' => 1,
-                  'exceptions' => 0, )
+                  'exceptions' => 0,
+                  'stream_context' => stream_context_create($opts)
+            )
         );
+        
         $this->sessionId = $this->client->login($this->config['user'], $this->config['pass']);
     }
 
